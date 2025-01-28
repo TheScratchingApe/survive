@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="description" content="Open source nodejs and HTML5 game" />
+    <meta
+      name="keywords"
+      content="HTML,HTML5,game,JavaScript,free,opensource,open source,github,nodejs,multiplayer,download"
+    />
+    <meta name="author" content="Zeeraa" />
+    <link rel="icon" href="/client/icon.png" />
+    <title>Survive</title>
+    <link rel="stylesheet" type="text/css" href="/client/style.css" />
+  </head>
+
+  <body onmousemove="mouseMove(event);">
+    <!-- Canvas principal -->
+    <canvas id="ctx" width="1200" height="600"></canvas>
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Score/HP en haut à gauche -->
+    <div id="scoreDiv" class="noselect">undefined</div>
+
+    <!-- Ecran de mort (respawn) -->
+    <div id="death" class="noselect">
+      <div id="dead" class="noselect">You are dead</div>
+      <br />
+      <div id="countdown" class="noselect">0</div>
+    </div>
+
+    <!-- Timer powerup -->
+    <div id="powerupCountdown" class="noselect">
+      Powerup time left:
+      <div id="powerupCountdownTimer">0</div>
+    </div>
+
+    <!-- 4 boutons d'upgrade : icône + <span> label -->
+    <div id="upgradeIcons" class="noselect">
+      <!-- 1) Double Fire Speed -->
+      <button class="shadow upgradeBtn" disabled="true" id="upgradefs">
+        <img
+          src="/client/assets/double.png"
+          width="64"
+          height="64"
+          alt="Double Fire Speed"
+        />
+        <span class="upgradeLabel" id="upgradefs_label">
+          Double fire speed (2000)
+        </span>
+      </button>
+
+      <!-- 2) Dual Bullets -->
+      <button class="shadow upgradeBtn" disabled="true" id="upgradedb">
+        <img
+          src="/client/assets/dual.png"
+          width="64"
+          height="64"
+          alt="Dual Bullets"
+        />
+        <span class="upgradeLabel" id="upgradedb_label">
+          Dual bullets (5000)
+        </span>
+      </button>
+
+      <!-- 3) Upgrade HP -->
+      <button class="shadow upgradeBtn" disabled="true" id="upgradehp">
+        <img
+          src="/client/assets/health.png"
+          width="64"
+          height="64"
+          alt="Upgrade HP"
+        />
+        <span class="upgradeLabel" id="upgradehp_label">
+          Upgrade HP (500)
+        </span>
+      </button>
+
+      <!-- 4) Bullet Size -->
+      <button class="shadow upgradeBtn" disabled="true" id="upgradeBulletSize">
+        <img
+          src="/client/assets/size.png"
+          width="64"
+          height="64"
+          alt="Upgrade bullet size"
+        />
+        <span class="upgradeLabel" id="upgradeBulletSize_label">
+          Upgrade bullet size (5000)
+        </span>
+      </button>
+    </div>
+
+    <!-- Set username en bas à droite -->
+    <div id="usernameDiv" class="noselect">
+      <button class="shadow" id="openNameBtn" onclick="openUsernameBox()">
+        Set username
+      </button>
+      <div id="usernameBox">
+        <input
+          id="nameInput"
+          value="Unnamed"
+          maxlength="16"
+          onkeydown="nameInputKeydown(event)"
+        />
+        <button class="shadow" id="setName" onclick="closeUsernameBox()">
+          OK
+        </button>
+      </div>
+    </div>
+
+    <!-- Scripts habituels -->
+    <script src="/client/jquery-3.3.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/client/cookies.js"></script>
+
+    <!-- Petit script pour afficher/cacher la box username -->
+    <script>
+      function openUsernameBox() {
+        document.getElementById("usernameBox").style.display = "block";
+      }
+      function closeUsernameBox() {
+        document.getElementById("usernameBox").style.display = "none";
+      }
+    </script>
+
+    <!-- Ton game.js (inchangé, sauf .html -> .text sur labels) -->
+    <script src="/client/game.js"></script>
+  </body>
+</html>
